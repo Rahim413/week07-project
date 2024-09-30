@@ -1,0 +1,52 @@
+.dashboard-body {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    margin: 0;
+    background-image: url('/shop-dashboard-image.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 50%; 
+    gap: 10px; 
+    margin-left: 400px;
+}
+
+.flex-box {
+    background-color: #04067cb4; 
+    padding: 15px;
+    text-align: center;
+    width: calc(33.33% - 20px);
+    height: 120px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.flex-box:hover {
+    background-color: #634949; 
+    cursor: pointer;
+}
+
+.flex-box a {
+    color: white; 
+    text-decoration: none;
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+.flex-box a:hover {
+    color: #f0f0f0;
+}

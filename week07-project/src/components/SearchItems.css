@@ -1,0 +1,45 @@
+.search-items-container {
+    margin-top: 60px;
+    margin-right: 500px;
+    
+  }
+  
+  .search-form input {
+    padding: 10px;
+    margin-right: 10px;
+    width: 300px;
+  }
+  
+  .search-form button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .search-form button:hover {
+    background-color: #45a049;
+  }
+  
+  .error-message {
+    color: rgba(202, 19, 19, 0.993);
+    text-align: center;
+    font-size: 24px;
+  }
+  
+  .searched-item {
+    background-color: #f3f3f3;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .searched-item p {
+    margin: 5px 0;
+    font-size: 18px;
+    color: #0da841;
+  }
+  
