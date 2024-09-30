@@ -14,7 +14,7 @@ export default function SearchItems() {
    
 
     try {
-      const response = await fetch(`http://localhost:8080/search-item?barcode=${barcode}`);
+      const response = await fetch(`https://week07-project-server.onrender.com/search-item?barcode=${barcode}`);
       if (!response.ok) throw new Error('Item not found');
       const item = await response.json(); 
       setSearchedItem(item);

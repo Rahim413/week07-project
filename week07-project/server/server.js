@@ -13,10 +13,11 @@ const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-// Login 
+// Login Endpoint
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
   const result = await db.query('SELECT * FROM users WHERE username = $1 AND password = $2', [username, password]);
+  
   if (result.rows.length > 0) {
     res.json({ message: 'Login successful' });
   } else {
@@ -24,7 +25,19 @@ app.post('/login', async (req, res) => {
   }
 });
 
-//Store item
+// Fetch All Items
+app.get('/items', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM store_items'); 
+    console.log(result.rows); 
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching items:', error);
+    res.status(500).json({ message: 'Internal server error' }); 
+  }
+});
+
+// Store Item
 app.post('/add-item', async (req, res) => {
   const { name, barcode, price, quantity_in_stock } = req.body;
   try {
@@ -40,7 +53,7 @@ app.post('/add-item', async (req, res) => {
   }
 });
 
-//Search item from BD
+// Search Item by Barcode
 app.get('/search-item', async (req, res) => {
   const { barcode } = req.query;
   try {
@@ -55,7 +68,7 @@ app.get('/search-item', async (req, res) => {
   }
 });
 
-
+// Start Server
 app.listen(8080, () => {
   console.log('Server running on port 8080');
 });

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './StoreItems.css';
-import Header from './Header'; 
+import Header from './Header';
 
 export default function StoreItems() {
   const [items, setItems] = useState([]); 
   const [newItem, setNewItem] = useState({ name: '', barcode: '', price: '', quantity_in_stock: '' }); 
-
+  const [successMessage, setSuccessMessage] = useState(''); 
   
   useEffect(() => {
     async function fetchItems() {
-      const response = await fetch('http://localhost:8080/items');
+      const response = await fetch('https://week07-project-server.onrender.com/items');
       const data = await response.json();
       setItems(data); 
     }
@@ -17,20 +17,21 @@ export default function StoreItems() {
     fetchItems();
   }, []);
 
- 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    const response = await fetch('http://localhost:8080/add-item', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newItem), 
-    });
-    
-    const addedItem = await response.json(); 
-    
-    setItems([...items, addedItem]); 
-    setNewItem({ name: '', barcode: '', price: '', quantity_in_stock: '' }); 
+    e.preventDefault(); 
+     
+      const response = await fetch('https://week07-project-server.onrender.com/add-item', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newItem),
+      });
+
+      const addedItem = await response.json(); 
+      console.log('Added item:', addedItem); 
+      setItems([addedItem]); 
+      setNewItem({ name: '', barcode: '', price: '', quantity_in_stock: '' }); 
+      setSuccessMessage('Item is stored successfully!');
+
   };
 
   return (
@@ -38,7 +39,7 @@ export default function StoreItems() {
       <Header /> 
       <div className="store-items-container">
         <form onSubmit={handleSubmit} className="add-item-form">
-          <h2> Store New Item</h2>
+          <h2>Store New Item</h2>
           <input
             type="text"
             placeholder="Item Name"
@@ -70,19 +71,8 @@ export default function StoreItems() {
           <button type="submit">Add Item</button>
         </form>
 
-        <div className="store-items-info">
-          <h2>Item stored Details</h2>
-          <ul>
-            {items.map(item => (
-              <li key={item.id} className="store-item">
-                <h3>{item.name}</h3>
-                <p>Barcode: {item.barcode}</p>
-                <p>Price: £{item.price}</p>
-                <p>Stock: {item.quantity_in_stock}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {successMessage && <p className="success-message">{successMessage}</p>}
+
       </div>
     </div>
   );
