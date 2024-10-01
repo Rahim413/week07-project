@@ -17,7 +17,7 @@ export default function StoreItems() {
 
     const addedItem = await response.json(); 
     console.log('Added item:', addedItem); 
-    setCurrentItem(addedItem);
+    setCurrentItem(addedItem);  
     setNewItem({ name: '', barcode: '', price: '', quantity_in_stock: '' }); 
     setSuccessMessage('Item is stored successfully!');
   };
@@ -62,14 +62,16 @@ export default function StoreItems() {
         <div className="items-list">
           <h2>Current Stored Item</h2>
           {successMessage && <p className="success-message">{successMessage}</p>}
-          {currentItem && (
+          {currentItem && (  
             <ul>
-              <li key={currentItem.barcode}> 
-                <h3>{currentItem.name}</h3> 
-                <p>Barcode: {currentItem.barcode}</p> 
-                <p>Price: £{currentItem.price}</p> 
-                <p>Stock: {currentItem.quantity_in_stock}</p> 
-              </li>
+              { [currentItem].map((item) => ( 
+                <li key={item.barcode}> 
+                  <h3>{item.name}</h3> 
+                  <p>Barcode: {item.barcode}</p> 
+                  <p>Price: £{item.price}</p> 
+                  <p>Stock: {item.quantity_in_stock}</p> 
+                </li>
+              )) }
             </ul>
           )}
         </div>
