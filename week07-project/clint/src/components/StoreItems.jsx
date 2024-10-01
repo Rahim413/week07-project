@@ -58,7 +58,6 @@ export default function StoreItems() {
           />
           <button type="submit">Add Item</button> 
         </form>
-
         <div className="items-list">
           <h2>Current Stored Item</h2>
           {successMessage && <p className="success-message">{successMessage}</p>}
